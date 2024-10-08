@@ -1,15 +1,19 @@
 import 'package:despesas_pessoal/models/transa%C3%A7%C3%A3o.dart';
 import 'package:flutter/material.dart';
 import 'package:despesas_pessoal/models/transação.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(ExpensesApp());
+
 
 class ExpensesApp extends StatelessWidget {
   const ExpensesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+
+    return MaterialApp(home: MyHomePage(
+    ));
   }
 }
 
@@ -44,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("despesas pessoais"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
@@ -67,19 +71,35 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2,
                         )
                       ),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        tr.value.toString()
+                        ' R\$ ${tr.value.toStringAsFixed(2)}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
                       ),
                     ),
                     Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(tr.title),
-                        Text(tr.date.toString()),
+                        Text(tr.title,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        ),
+                        Text(
+                          DateFormat('d MMM y').format(tr.date),
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                        ),
+                        ),
                       ],
                     )
                   ],
@@ -87,6 +107,48 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             }).toList(),
           ),
+          SingleChildScrollView(
+            child: Card(
+            elevation: 5,
+            
+            child :Container(
+              
+              margin:EdgeInsets.all(10),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Titulo',
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Valor (R\$)',
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextButton(onPressed: (){}, 
+                        child: Text('Nova Transação',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.purple
+
+                        ),
+                        )
+                    )
+                  ],
+                )
+
+              ],
+            ),
+            ),
+            ),
+          ),
+          
         ],
       ),
     );
