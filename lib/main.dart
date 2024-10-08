@@ -20,7 +20,8 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Despesas Pessoais'),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+       child:Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: const [
           SizedBox(
@@ -32,6 +33,7 @@ class MyHomePage extends StatelessWidget {
           ),
           TransactionUser(),
         ],
+      ),
       ),
     );
   }
